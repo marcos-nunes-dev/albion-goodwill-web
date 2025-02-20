@@ -120,11 +120,14 @@ export default function AboutPage() {
                   I want you to be proud of me. I want Lily to be proud of me.
                 </p>
                 <Link href="/signup">
-                  <Button size="lg" variant="gradient">
-                    <span className="flex item-center">
+                  <Button 
+                    size="lg" 
+                    variant="default"
+                    className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                  >
+                    <span className="flex items-center">
                       <Heart className="mr-2 h-5 w-5" />
                       <span>Join Our Community</span>
-                      <ArrowRight className="ml-2 h-5 w-5" />
                     </span>
                   </Button>
                 </Link>
