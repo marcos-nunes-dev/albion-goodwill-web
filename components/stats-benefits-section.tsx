@@ -45,16 +45,16 @@ export function StatsBenefitsSection() {
       totalTime: "6h 10m",
       activeTime: "4h 1m",
       afkTime: "2h 3m",
-      mutedTime: "0m"
+      mutedTime: "0m",
     },
     chatActivity: {
-      messagesSent: 4
+      messagesSent: 4,
     },
     activityDistribution: {
       active: 65,
-      afk: 35
+      afk: 35,
     },
-    lastUpdated: "Hoje às 16:50"
+    lastUpdated: "Hoje às 16:50",
   };
 
   return (

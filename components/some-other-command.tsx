@@ -1,3 +1,5 @@
+import { DiscordMessage } from "./ui/discord-message";
+
 export function SomeOtherCommand() {
   return (
     <DiscordMessage thinkingMessage="Processing command...">
@@ -5,5 +7,5 @@ export function SomeOtherCommand() {
         {/* Your command output content */}
       </div>
     </DiscordMessage>
-  )
-} 
+  );
+}

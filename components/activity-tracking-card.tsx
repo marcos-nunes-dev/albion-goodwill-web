@@ -29,7 +29,7 @@ export function ActivityTrackingCard(props: ActivityTrackingProps) {
     voiceActivity,
     chatActivity,
     activityDistribution,
-    lastUpdated
+    lastUpdated,
   } = props;
 
   return (
@@ -41,19 +41,16 @@ export function ActivityTrackingCard(props: ActivityTrackingProps) {
       <DiscordMessage>
         <div className="space-y-2 text-sm rounded bg-gray-50 p-4 font-mono border-l-2 border-purple-900 text-gray-800">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gray-300" /> {/* Avatar placeholder */}
+            <div className="w-6 h-6 rounded-full bg-gray-300" />{" "}
+            {/* Avatar placeholder */}
             <span className="font-semibold">{playerName}'s Daily Activity</span>
           </div>
-          
-          <div className="text-muted-foreground">
-            Activity stats for {date}
-          </div>
+
+          <div className="text-muted-foreground">Activity stats for {date}</div>
 
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div>
-              <div className="flex items-center gap-2">
-                🎤 Voice Activity
-              </div>
+              <div className="flex items-center gap-2">🎤 Voice Activity</div>
               <div className="space-y-1 mt-1">
                 <div>Total Time: {voiceActivity.totalTime}</div>
                 <div>Active Time: {voiceActivity.activeTime}</div>
@@ -63,9 +60,7 @@ export function ActivityTrackingCard(props: ActivityTrackingProps) {
             </div>
 
             <div>
-              <div className="flex items-center gap-2">
-                💬 Chat Activity
-              </div>
+              <div className="flex items-center gap-2">💬 Chat Activity</div>
               <div className="mt-1">
                 Messages Sent: {chatActivity.messagesSent}
               </div>
@@ -77,13 +72,14 @@ export function ActivityTrackingCard(props: ActivityTrackingProps) {
               📊 Activity Distribution
             </div>
             <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-blue-500"
                 style={{ width: `${activityDistribution.active}%` }}
               />
             </div>
             <div className="text-xs mt-1">
-              Active: {activityDistribution.active}% | AFK: {activityDistribution.afk}%
+              Active: {activityDistribution.active}% | AFK:{" "}
+              {activityDistribution.afk}%
             </div>
           </div>
 
@@ -94,4 +90,4 @@ export function ActivityTrackingCard(props: ActivityTrackingProps) {
       </DiscordMessage>
     </motion.div>
   );
-} 
+}

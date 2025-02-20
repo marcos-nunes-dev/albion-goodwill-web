@@ -53,7 +53,7 @@ export function TypedTestimonial({ quote, author, role, duration }: TypedTestimo
       <Progress
         value={progress}
         className="w-full h-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20"
-        indicatorClassName="bg-gradient-to-r from-blue-500 to-purple-500"
+        // indicatorClassname="bg-gradient-to-r from-blue-500 to-purple-500"
       />
       <blockquote className="text-lg font-medium leading-relaxed min-h-[150px]">
         {" "}
