@@ -12,14 +12,12 @@ export function SiteHeader() {
             <span className="font-bold">GoodWill</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="#features"
-              className="transition-colors hover:text-foreground/80"
-            >
+            <div className="flex items-center gap-2 text-muted-foreground cursor-not-allowed">
               Documentation
-            </Link>
+              <span className="text-xs bg-muted px-1 py-0.5 rounded">soon</span>
+            </div>
             <Link
-              href="#commands"
+              href="https://discord.com/users/219636732956508171"
               className="transition-colors hover:text-foreground/80"
             >
               Report a bug
@@ -29,7 +27,7 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center space-x-4">
           <Button variant="default" size="lg" asChild>
             <Link
-              href="https://discord.com/oauth2/authorize"
+              href="https://discord.com/oauth2/authorize?client_id=1341055866064867410"
               className="whitespace-nowrap"
             >
               <span>Add to Discord</span>

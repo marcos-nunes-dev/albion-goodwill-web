@@ -24,7 +24,7 @@ export function HeroSection() {
         <p className="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl md:text-2xl">
           Comprehensive stats tracking, role management, and player verification system designed for gaming communities.
         </p>
-        <Link href="https://discord.com/oauth2/authorize">
+        <Link href="https://discord.com/oauth2/authorize?client_id=1341055866064867410">
           <Button size="lg" variant="ghost" className="whitespace-nowrap">
             <span className="flex items-center justify-center">
               Add to Discord
