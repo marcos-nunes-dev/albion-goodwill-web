@@ -32,18 +32,23 @@ export function SiteFooter() {
                 </li>
                 <li>
                   <Link
-                    href="https://discord.com/oauth2/authorize?client_id=1341055866064867410"
+                    href="https://discord.com/api/oauth2/authorize?client_id=1341055866064867410&permissions=8&scope=bot%20applications.commands"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Add to Discord
                   </Link>
                 </li>
-                <div className="flex items-center gap-2 text-muted-foreground cursor-not-allowed">
-                  Documentation
-                  <span className="text-xs bg-muted px-1 py-0.5 rounded">
-                    soon
-                  </span>
-                </div>
+                <li>
+                  <Link
+                    href="/documentation"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                  >
+                    Documentation
+                    <span className="text-xs bg-primary/20 text-primary px-1 py-0.5 rounded">
+                      new
+                    </span>
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

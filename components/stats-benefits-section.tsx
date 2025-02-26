@@ -108,10 +108,6 @@ export function StatsBenefitsSection() {
                     description="Check inactive members in a role"
                   />
                   <StatCommand
-                    command="presenceleaderboard"
-                    description="View most active members"
-                  />
-                  <StatCommand
                     command="presencedaily"
                     description="Daily activity summary"
                   />

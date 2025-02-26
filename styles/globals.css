@@ -1,0 +1,49 @@
+/* Add these animations */
+@keyframes float-1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(10%, 10%); }
+  50% { transform: translate(-5%, 15%); }
+  75% { transform: translate(-15%, -5%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float-2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-15%, 5%); }
+  50% { transform: translate(10%, -10%); }
+  75% { transform: translate(5%, 15%); }
+  100% { transform: translate(0, 0); }
+}
+
+.blur-circle {
+  position: absolute;
+  border-radius: 9999px;
+}
+
+/* For blue circles */
+.blur-circle-blue {
+  background: rgb(77, 7, 227);
+  opacity: 0.15;
+}
+
+/* For pink circles */
+.blur-circle-pink {
+  background: rgb(255, 76, 140);
+  opacity: 0.15;
+}
+
+/* Safari-specific adjustments */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    .blur-circle {
+      display: none;
+    }
+  }
+}
+
+/* Hide circles on mobile devices */
+@media (max-width: 768px) {
+  .blur-circle {
+    display: none;
+  }
+} 
