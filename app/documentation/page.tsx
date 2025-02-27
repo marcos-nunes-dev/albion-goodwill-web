@@ -227,9 +227,13 @@ const Documentation = () => {
                 <div>
                   <h3 className="text-xl font-semibold mb-4">Player Registration</h3>
                   <p className="text-muted-foreground mb-6">
-                    Our registration system is flexible and doesn&apos;t require users to match their Discord username with their in-game name. 
-                    Players can freely change their Discord nickname without affecting their registration. The Verified role serves as an indicator that a player has successfully linked their Albion Online character to their Discord account. <small>*Note that this does not ensure that the player is in your guild or not.</small>
+                    Our registration system is flexible and doesn&apos;t require users to match their Discord username with their in-game name, just if you want to use the command <code className="text-primary">/setsyncnickname [enable:true/false]</code> you can sync the nickname with the in-game name. 
+                    Without this command turned on players can freely change their Discord nickname without affecting their registration. The Verified role serves as an indicator that a player has successfully linked their Albion Online character to their Discord account. <small>*Note that this does not ensure that the player is in your guild or not.</small>
                   </p>
+                  <div className="text-muted-foreground mb-12">
+                    Since the Albion APIs are instable and we can't relly on their data, this bot use the ingame members list to manage permission of players that no longer belongs to the guild.
+                    Use the command <code className="text-primary">/membersdiff @membersRole &lt;members_txt&gt;</code> to compare your Discord server members against your Albion Online guild roster to identify discrepancies and remove the role from players that no longer belongs to the guild.
+                  </div>	
                   
                   <div className="space-y-4">
                     <div className="border-b pb-4">
