@@ -131,6 +131,11 @@ const Documentation = () => {
                             /setverifiedrole role:@Verified
                           </code>
                         </div>
+                        <div className="mt-2 bg-muted rounded-lg p-3">
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-medium text-primary">About Verified Role:</span> The Verified role is automatically assigned to users when they link their Albion Online character using the /register command. This role serves as a visual indicator that a player has completed the account linking process, helping guild officers track which members have verified their game identities.
+                          </p>
+                        </div>
                       </div>
 
                       <div>
@@ -222,22 +227,21 @@ const Documentation = () => {
                 <div>
                   <h3 className="text-xl font-semibold mb-4">Player Registration</h3>
                   <p className="text-muted-foreground mb-6">
-                    Our registration system is flexible and doesn't require users to match their Discord username with their in-game name. 
-                    Players can freely change their Discord nickname without affecting their registration. <small>*Note that this does not ensure that the player is in your guild or not.</small>
+                    Our registration system is flexible and doesn&apos;t require users to match their Discord username with their in-game name. 
+                    Players can freely change their Discord nickname without affecting their registration. The Verified role serves as an indicator that a player has successfully linked their Albion Online character to their Discord account. <small>*Note that this does not ensure that the player is in your guild or not.</small>
                   </p>
                   
                   <div className="space-y-4">
                     <div className="border-b pb-4">
                       <code className="text-primary">/register [region] [player_name]</code>
-                      <p className="text-muted-foreground mt-2">Links your Discord account with your Albion character and assigns the Verified role.</p>
+                      <p className="text-muted-foreground mt-2">Links your Discord account with your Albion character and assigns the Verified role to confirm the linkage.</p>
                       <div className="bg-muted rounded-lg p-4 mt-3 space-y-3">
                         <p className="text-sm text-muted-foreground">
                           <span className="font-medium text-primary">Note:</span> This command uses the MurderLedger API to verify player data. 
                           Recently created characters might not be found immediately in the database.
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          <span className="font-medium text-primary">Role Assignment:</span> Upon successful registration, 
-                          players are automatically assigned the Verified role configured in your server setup.
+                          <span className="font-medium text-primary">Verified Role:</span> The Verified role indicates that a player has successfully linked their Albion Online character to their Discord account. This helps guild officers identify which members have completed the registration process.
                         </p>
                       </div>
                     </div>
@@ -256,6 +260,58 @@ const Documentation = () => {
                       Automatically updates role assignments for all members based on their main class in Albion Online <small>(We use Albion Battles and Albion BB history for this)</small>. 
                       <span className="block text-sm mt-1">This helps keep role assignments synchronized with players' current main roles in-game.</span>
                     </p>
+                  </div>
+                  <div className="border-b pb-4">
+                    <code className="text-primary">/membersdiff @membersRole &lt;members_txt&gt;</code>
+                    <p className="text-muted-foreground mt-2">
+                      Compares your Discord server members against your Albion Online guild roster to identify discrepancies.
+                    </p>
+                    <div className="bg-muted rounded-lg p-4 mt-3 space-y-3">
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-medium text-primary">How to use:</span>
+                      </p>
+                      <ol className="text-sm text-muted-foreground space-y-2 list-decimal pl-4">
+                        <li>In Albion Online, press &ldquo;G&rdquo; to open guild panel</li>
+                        <li>Copy the entire members list to a text file</li>
+                        <li>Upload the text file with the command</li>
+                      </ol>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        <span className="font-medium text-primary">The command will show:</span>
+                      </p>
+                      <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+                        <li>Discord users with the members role who are no longer in the guild</li>
+                        <li>Guild members who haven&apos;t registered their Discord account yet</li>
+                      </ul>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        This helps keep your Discord roles synchronized with your actual guild roster and identify members who still need to register.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border-b pb-4">
+                    <code className="text-primary">/setsyncnickname [enable:true/false]</code>
+                    <p className="text-muted-foreground mt-2">
+                      Toggles automatic synchronization of Discord nicknames with Albion Online character names.
+                    </p>
+                    <div className="bg-muted rounded-lg p-4 mt-3 space-y-3">
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-medium text-primary">When enabled:</span>
+                      </p>
+                      <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+                        <li>Members&apos; Discord nicknames will be automatically set to match their registered Albion character name</li>
+                        <li>Members will not be able to change their nicknames manually</li>
+                        <li>The bot will manage nickname permissions automatically</li>
+                      </ul>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        <span className="font-medium text-primary">When disabled:</span>
+                      </p>
+                      <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+                        <li>Members can set their Discord nicknames to whatever they prefer</li>
+                        <li>Nickname change permissions are restored to members</li>
+                      </ul>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        This feature helps maintain clear identification of players in your Discord server by ensuring their nicknames match their in-game names.
+                      </p>
+                    </div>
                   </div>
                   </div>
                 </div>
