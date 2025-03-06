@@ -8,15 +8,26 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Plus, Trash2, Download, Search, Users, Sword, Upload } from 'lucide-react';
+import { Plus, Trash2, Download, Search, Users, Sword, Upload, FilePlus } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { SearchableSelect } from '@/components/ui/searchable-select';
 import { cn } from "@/lib/utils";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function PingCompositionBuilder() {
+    const [showNewConfirmation, setShowNewConfirmation] = useState(false);
     const [composition, setComposition] = useState<PingComposition>(() => {
         // Try to load from localStorage on initial render
         if (typeof window !== 'undefined') {
@@ -144,6 +155,15 @@ export default function PingCompositionBuilder() {
         URL.revokeObjectURL(url);
     };
 
+    const handleNewComposition = () => {
+        setComposition({
+            description: '',
+            title: '',
+            parties: [{ name: 'Main Party', weapons: [] }]
+        });
+        setShowNewConfirmation(false);
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <div className="container mx-auto py-8 px-4 space-y-8">
@@ -154,6 +174,14 @@ export default function PingCompositionBuilder() {
                         <p className="text-muted-foreground mt-2">Create and manage your Albion Online party compositions</p>
                     </div>
                     <div className="flex gap-2">
+                        <Button
+                            variant="outline"
+                            onClick={() => setShowNewConfirmation(true)}
+                            className="flex items-center gap-2"
+                        >
+                            <FilePlus className="h-4 w-4" />
+                            New
+                        </Button>
                         <div className="relative">
                             <input
                                 type="file"
@@ -177,6 +205,21 @@ export default function PingCompositionBuilder() {
                         </Button>
                     </div>
                 </div>
+
+                <AlertDialog open={showNewConfirmation} onOpenChange={setShowNewConfirmation}>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Create New Composition</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This will clear all current changes and start with a fresh composition. Are you sure you want to continue?
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleNewComposition}>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
 
                 <Separator />
 
@@ -222,7 +265,7 @@ export default function PingCompositionBuilder() {
                         </Button>
                     </div>
 
-                    <ScrollArea className="h-[600px] pr-4">
+                    <ScrollArea className="h-[600px]">
                         <div className="space-y-4">
                             {composition.parties.map((party, partyIndex) => (
                                 <Card key={partyIndex} className="border-2">
