@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Plus, Trash2, Download, Search, Users, Sword } from 'lucide-react';
+import { Plus, Trash2, Download, Search, Users, Sword, Upload } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -17,11 +17,48 @@ import { SearchableSelect } from '@/components/ui/searchable-select';
 import { cn } from "@/lib/utils";
 
 export default function PingCompositionBuilder() {
-    const [composition, setComposition] = useState<PingComposition>({
-        description: '',
-        title: '',
-        parties: [{ name: 'Main Party', weapons: [] }]
+    const [composition, setComposition] = useState<PingComposition>(() => {
+        // Try to load from localStorage on initial render
+        if (typeof window !== 'undefined') {
+            const savedComposition = localStorage.getItem('pingComposition');
+            if (savedComposition) {
+                return JSON.parse(savedComposition);
+            }
+        }
+        return {
+            description: '',
+            title: '',
+            parties: [{ name: 'Main Party', weapons: [] }]
+        };
     });
+
+    // Save to localStorage whenever composition changes
+    useEffect(() => {
+        localStorage.setItem('pingComposition', JSON.stringify(composition));
+    }, [composition]);
+
+    const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const importedComposition = JSON.parse(e.target?.result as string);
+                // Validate the imported data structure
+                if (importedComposition.title !== undefined && 
+                    importedComposition.description !== undefined && 
+                    Array.isArray(importedComposition.parties)) {
+                    setComposition(importedComposition);
+                } else {
+                    alert('Invalid composition file format');
+                }
+            } catch (error) {
+                alert('Error reading file. Please make sure it\'s a valid JSON file.');
+            }
+        };
+        reader.readAsText(file);
+    };
 
     // Convert weapons to select options with all localized names as search terms
     const weaponOptions = weapons.map(weapon => ({
@@ -116,10 +153,29 @@ export default function PingCompositionBuilder() {
                         <h1 className="text-4xl font-bold tracking-tight">Ping Composition Builder</h1>
                         <p className="text-muted-foreground mt-2">Create and manage your Albion Online party compositions</p>
                     </div>
-                    <Button onClick={exportComposition} className="flex items-center gap-2">
-                        <Download className="h-4 w-4" />
-                        Export
-                    </Button>
+                    <div className="flex gap-2">
+                        <div className="relative">
+                            <input
+                                type="file"
+                                accept=".json"
+                                onChange={handleImport}
+                                className="hidden"
+                                id="import-composition"
+                            />
+                            <Button
+                                variant="outline"
+                                onClick={() => document.getElementById('import-composition')?.click()}
+                                className="flex items-center gap-2"
+                            >
+                                <Upload className="h-4 w-4" />
+                                Import
+                            </Button>
+                        </div>
+                        <Button onClick={exportComposition} className="flex items-center gap-2">
+                            <Download className="h-4 w-4" />
+                            Export
+                        </Button>
+                    </div>
                 </div>
 
                 <Separator />
