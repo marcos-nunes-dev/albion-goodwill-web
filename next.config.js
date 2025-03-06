@@ -22,6 +22,10 @@ const nextConfig = {
   },
   // Increase timeout
   staticPageGenerationTimeout: 1000,
+  // Configure allowed image domains
+  images: {
+    domains: ['render.albiononline.com'],
+  },
 };
 
 module.exports = nextConfig; 

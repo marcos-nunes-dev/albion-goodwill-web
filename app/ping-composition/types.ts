@@ -11,6 +11,7 @@ export interface Weapon {
     type: string;
     players_required: number;
     free_role: boolean;
+    description: string;
 }
 
 export interface Party {

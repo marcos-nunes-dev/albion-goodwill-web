@@ -72,11 +72,15 @@ export default function PingCompositionBuilder() {
     };
 
     // Convert weapons to select options with all localized names as search terms
-    const weaponOptions = weapons.map(weapon => ({
-        value: weapon.LocalizedNames['EN-US'],
-        label: weapon.LocalizedNames['EN-US'],
-        searchTerms: Object.values(weapon.LocalizedNames)
-    }));
+    const weaponOptions = weapons.map(weapon => {
+        const name = weapon.LocalizedNames['EN-US'];
+        return {
+            value: name,
+            label: name,
+            searchTerms: Object.values(weapon.LocalizedNames),
+            uniqueName: weapon.UniqueName
+        };
+    });
 
     const addParty = () => {
         setComposition(prev => ({
@@ -99,7 +103,7 @@ export default function PingCompositionBuilder() {
                 if (i === partyIndex) {
                     return {
                         ...party,
-                        weapons: [...party.weapons, { type: '', players_required: 1, free_role: false }]
+                        weapons: [...party.weapons, { type: '', players_required: 1, free_role: false, description: '' }]
                     };
                 }
                 return party;
@@ -164,9 +168,11 @@ export default function PingCompositionBuilder() {
         setShowNewConfirmation(false);
     };
 
+    console.log(weaponOptions)
+
     return (
         <div className="min-h-screen bg-background">
-            <div className="container mx-auto py-8 px-4 space-y-8">
+            <div className="container mx-auto py-8 px-4 space-y-8 h-screen flex flex-col">
                 {/* Header Section */}
                 <div className="flex items-center justify-between">
                     <div>
@@ -256,7 +262,7 @@ export default function PingCompositionBuilder() {
                 </Card>
 
                 {/* Parties Section */}
-                <div className="space-y-4">
+                <div className="space-y-4 flex-1 flex flex-col">
                     <div className="flex items-center justify-between">
                         <h2 className="text-2xl font-semibold">Parties</h2>
                         <Button onClick={addParty} className="flex items-center gap-2">
@@ -265,7 +271,7 @@ export default function PingCompositionBuilder() {
                         </Button>
                     </div>
 
-                    <ScrollArea className="h-[600px]">
+                    <ScrollArea className="flex-1">
                         <div className="space-y-4">
                             {composition.parties.map((party, partyIndex) => (
                                 <Card key={partyIndex} className="border-2">
@@ -342,6 +348,18 @@ export default function PingCompositionBuilder() {
                                                         <Switch
                                                             checked={weapon.free_role}
                                                             onCheckedChange={(checked) => updateWeapon(partyIndex, weaponIndex, 'free_role', checked)}
+                                                        />
+                                                    </div>
+                                                    <div className="flex-1 space-y-2">
+                                                        <Label className="flex items-center gap-2">
+                                                            <Search className="h-4 w-4" />
+                                                            Description
+                                                        </Label>
+                                                        <Input
+                                                            value={weapon.description}
+                                                            onChange={(e) => updateWeapon(partyIndex, weaponIndex, 'description', e.target.value)}
+                                                            placeholder="Enter weapon description..."
+                                                            className="w-full"
                                                         />
                                                     </div>
                                                     <div className="flex flex-col justify-end">
